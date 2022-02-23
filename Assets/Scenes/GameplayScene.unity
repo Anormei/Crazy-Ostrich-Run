@@ -412,7 +412,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 8593667583423233162}
           m_TargetAssemblyTypeName: Jump, Assembly-CSharp
-          m_MethodName: onDown
+          m_MethodName: holdJump
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -428,7 +428,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 8593667583423233162}
           m_TargetAssemblyTypeName: Jump, Assembly-CSharp
-          m_MethodName: onUp
+          m_MethodName: releaseJump
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -918,7 +918,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2133538899780736712, guid: 3a2b5f41d0e592d47ab7807f01e4a377, type: 3}
       propertyPath: jumpForce
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2133538899780736712, guid: 3a2b5f41d0e592d47ab7807f01e4a377, type: 3}
       propertyPath: fullJumpForce
@@ -927,6 +927,14 @@ PrefabInstance:
     - target: {fileID: 2133538899780736712, guid: 3a2b5f41d0e592d47ab7807f01e4a377, type: 3}
       propertyPath: doubleJumpForce
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2133538899780736712, guid: 3a2b5f41d0e592d47ab7807f01e4a377, type: 3}
+      propertyPath: shortHopForce
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2133538899780736712, guid: 3a2b5f41d0e592d47ab7807f01e4a377, type: 3}
+      propertyPath: shortHopReactionTime
+      value: 0.08
       objectReference: {fileID: 0}
     - target: {fileID: 8593667583644279330, guid: 3a2b5f41d0e592d47ab7807f01e4a377, type: 3}
       propertyPath: m_Name

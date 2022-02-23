@@ -7,22 +7,21 @@ public class Jump : MonoBehaviour
     private Rigidbody2D rb;
 
     [SerializeField]
-    private float jumpForce;
+    private float shortHopForce;
     [SerializeField]
-    private float fullJumpForce;
+    private float jumpForce;
     [SerializeField]
     private float doubleJumpForce;
     [SerializeField]
-    private float activateLongJumpTimer;
+    private float shortHopReactionTime;
 
     private float yVelocity;
 
-    private bool fullJumped = false;
     private bool airJumped = false;
 
-    private float timePressed = 0;
+    private float timeJumpHeld = 0;
 
-    private bool isPressed;
+    private bool jumpedFromGround;
 
     // Start is called before the first frame update
     void Start()
@@ -40,65 +39,51 @@ public class Jump : MonoBehaviour
             airJumped = false;
         }
 
-        Debug.Log(rb.velocity);
+        if (jumpedFromGround)
+        {
+            timeJumpHeld += Time.deltaTime;
+        }
+
     }
 
     void FixedUpdate()
     {
-        if (isPressed)
-        {
-            timePressed += Time.deltaTime;
-            jump();
-        }
+
     }
 
-    public void onDown()
+    public void holdJump()
     {
+        timeJumpHeld = 0;
         if (grounded())
         {
-            isPressed = true;
+            jumpedFromGround = true;
+            jump();
         }
         else
         {
             airJump();
         }
-        //Debug.Log("onDown");
     }
 
-    public void onUp()
+    public void releaseJump()
     {
-        isPressed = false;
-        timePressed = 0;
-        //Debug.Log("onUp");
-    }
-
-    public void jump()
-    {
-        if (grounded())
+        if (jumpedFromGround && reactedForShortHop())
         {
             shortHop();
         }
 
-        if (timePressed >= activateLongJumpTimer)
-        {
-            fullJump();
-        }
+        jumpedFromGround = false;
+
+    }
+
+    public void jump()
+    {
+        applyJumpForce(jumpForce);
     }
 
     public void shortHop()
     {
-        fullJumped = false;
-        applyJumpForce(jumpForce);
-    }
-
-    public void fullJump()
-    {
-        if (fullJumped || airJumped)
-            return;
-
-        fullJumped = true;
-        applyJumpForce(fullJumpForce);
- 
+        applyJumpForce(shortHopForce);
     }
 
     public void airJump()
@@ -119,5 +104,10 @@ public class Jump : MonoBehaviour
     {
         rb.velocity = new Vector3(0, velocity, 0);
 
+    }
+
+    private bool reactedForShortHop()
+    {
+        return timeJumpHeld <= shortHopReactionTime;
     }
 }
