@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 8593667583644279334}
   - component: {fileID: 8593667583644279335}
   - component: {fileID: 2133538899780736712}
+  - component: {fileID: 8593667583423233164}
+  - component: {fileID: 6020319591402879985}
   m_Layer: 0
   m_Name: Ostrich
   m_TagString: Untagged
@@ -144,5 +146,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adefdac8d9fd6ec4ab67a3819c1a598e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpVelocity: 0
-  doubleJumpVelocity: 0
+  shortHopForce: 5
+  jumpForce: 10
+  doubleJumpForce: 10
+  shortHopReactionTime: 0.08
+--- !u!114 &8593667583423233164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8593667583644279330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbcdbe8ce6fc1c749bc007e21d4f8c52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  game: {fileID: 0}
+  slideAnimation: {fileID: 0}
+--- !u!95 &6020319591402879985
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8593667583644279330}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 80b602d6e3a07ac46a9fc29cee75907b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

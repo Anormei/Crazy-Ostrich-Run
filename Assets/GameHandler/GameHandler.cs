@@ -18,6 +18,9 @@ public class GameHandler : MonoBehaviour
     private float scrollSpeed;
     private Rect screenDimensions;
 
+    private float speedBoost;
+    private float speedBoostDuration;
+
     public float ScrollSpeed
     {
         get { return scrollSpeed; }
@@ -43,6 +46,25 @@ public class GameHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(speedBoostDuration > 0)
+        {
+
+        }
+    }
+
+    public void scrollFaster(float speed)
+    {
+        scrollSpeed += speed;
+    }
+
+    public void scrollSlower(float speed)
+    {
+        scrollSpeed -= speed;
+    }
+
+    public void boostSpeed(float speed, float duration)
+    {
+        speedBoost = speed;
+        speedBoostDuration = duration;
     }
 }

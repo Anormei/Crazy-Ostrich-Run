@@ -892,61 +892,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2133538899780736712, guid: 3a2b5f41d0e592d47ab7807f01e4a377, type: 3}
-      propertyPath: jumpVelocity
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2133538899780736712, guid: 3a2b5f41d0e592d47ab7807f01e4a377, type: 3}
-      propertyPath: doubleJumpVelocity
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 2133538899780736712, guid: 3a2b5f41d0e592d47ab7807f01e4a377, type: 3}
-      propertyPath: longJumpVelocity
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2133538899780736712, guid: 3a2b5f41d0e592d47ab7807f01e4a377, type: 3}
-      propertyPath: velocityToAddForLongJump
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2133538899780736712, guid: 3a2b5f41d0e592d47ab7807f01e4a377, type: 3}
-      propertyPath: activateLongJumpTimer
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2133538899780736712, guid: 3a2b5f41d0e592d47ab7807f01e4a377, type: 3}
-      propertyPath: fullJumpVelocity
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 2133538899780736712, guid: 3a2b5f41d0e592d47ab7807f01e4a377, type: 3}
-      propertyPath: jumpForce
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 2133538899780736712, guid: 3a2b5f41d0e592d47ab7807f01e4a377, type: 3}
-      propertyPath: fullJumpForce
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 2133538899780736712, guid: 3a2b5f41d0e592d47ab7807f01e4a377, type: 3}
-      propertyPath: doubleJumpForce
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 2133538899780736712, guid: 3a2b5f41d0e592d47ab7807f01e4a377, type: 3}
-      propertyPath: shortHopForce
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2133538899780736712, guid: 3a2b5f41d0e592d47ab7807f01e4a377, type: 3}
-      propertyPath: shortHopReactionTime
-      value: 0.08
-      objectReference: {fileID: 0}
+    - target: {fileID: 8593667583423233164, guid: 3a2b5f41d0e592d47ab7807f01e4a377, type: 3}
+      propertyPath: game
+      value: 
+      objectReference: {fileID: 1573034574}
     - target: {fileID: 8593667583644279330, guid: 3a2b5f41d0e592d47ab7807f01e4a377, type: 3}
       propertyPath: m_Name
       value: Ostrich
       objectReference: {fileID: 0}
     - target: {fileID: 8593667583644279332, guid: 3a2b5f41d0e592d47ab7807f01e4a377, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 8593667583644279332, guid: 3a2b5f41d0e592d47ab7807f01e4a377, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.04
+      value: -1.07
       objectReference: {fileID: 0}
     - target: {fileID: 8593667583644279332, guid: 3a2b5f41d0e592d47ab7807f01e4a377, type: 3}
       propertyPath: m_LocalPosition.z
