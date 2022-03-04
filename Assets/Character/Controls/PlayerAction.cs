@@ -5,7 +5,8 @@ using UnityEngine.Events;
 
 public class PlayerAction : MonoBehaviour
 {
-
+    [SerializeField]
+    private Rigidbody2D rb;
     [SerializeField]
     private UnityEvent holdSlide;
     [SerializeField]
@@ -16,13 +17,13 @@ public class PlayerAction : MonoBehaviour
     private UnityEvent releaseFastFall;
 
 
-    private Rigidbody2D rb;
+
     private float yVelocity;
 
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
+        
     }
 
     // Update is called once per frame
@@ -31,7 +32,7 @@ public class PlayerAction : MonoBehaviour
         yVelocity = rb.velocity.y;
     }
 
-    void holdDown()
+    public void holdDown()
     {
         if (grounded())
         {
@@ -43,7 +44,7 @@ public class PlayerAction : MonoBehaviour
         }
     }
 
-    void release()
+    public void release()
     {
         if (grounded())
         {

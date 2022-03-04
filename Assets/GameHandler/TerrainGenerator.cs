@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static PlatformGenerator;
 
 public class TerrainGenerator : MonoBehaviour
 {
@@ -10,9 +11,10 @@ public class TerrainGenerator : MonoBehaviour
     private GameObject startingPlatform;
     [SerializeField]
     private Spawner flatPlatformSpawner;
+    [SerializeField]
+    private Spawner endPlatformSpawner;
     private Spawner cliffSpawner;
     private Spawner rockTowerSpawner;
-
 
     private List<GameObject> terrain = new List<GameObject>();
 
@@ -49,15 +51,35 @@ public class TerrainGenerator : MonoBehaviour
 
         if (land.rightBound() < game.World.xMax)
         {
-
-            terrain.Add(flatPlatformSpawner.createObject((obj) =>
-            {
-                obj.GetComponent<ObjectScroller>().game = game;
-                obj.transform.parent = transform;
-                obj.transform.gameObject.SetActive(true);
-                obj.transform.position = new Vector3(land.rightBound() + obj.halfWidth(), land.transform.position.y, 0);
-            }));
+            spawnFlatPlatform(land);
         }
+    }
+
+    private void generateTerrain(GameObject land)
+    {
+        PlatformGenerator platform = land.GetComponent<PlatformGenerator>();
+        TerrainType type = platform.terrainType;
+
+        switch (type)
+        {
+            case TerrainType.End:
+                break;
+            case TerrainType.Tower:
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void spawnFlatPlatform(GameObject land)
+    {
+        terrain.Add(flatPlatformSpawner.createObject((obj) =>
+        {
+            obj.GetComponent<ObjectScroller>().game = game;
+            obj.transform.parent = transform;
+            obj.transform.gameObject.SetActive(true);
+            obj.transform.position = new Vector3(land.rightBound() + obj.halfWidth(), land.transform.position.y, 0);
+        }));
     }
 
     private void attachToSpawner(GameObject obj, Spawner spawner)

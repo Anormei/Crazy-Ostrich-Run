@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectToSpawn: {fileID: 5503438706588928612, guid: 4acd04f7155fc2f438937d2b01e0205a, type: 3}
   maxPoolSize: 10
+  odds: 3
+  outOf: 4
 --- !u!1001 &8345798334556876695
 PrefabInstance:
   m_ObjectHideFlags: 0

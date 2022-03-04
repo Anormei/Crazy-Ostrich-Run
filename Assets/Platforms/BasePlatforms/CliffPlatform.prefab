@@ -10,12 +10,12 @@ GameObject:
   m_Component:
   - component: {fileID: 5503438706588928619}
   - component: {fileID: 5503438706588928618}
-  - component: {fileID: -2434951771821556030}
   - component: {fileID: 1537040768587295475}
   - component: {fileID: 7014175645257354387}
   - component: {fileID: 469955533372184727}
+  - component: {fileID: -7418967880094962075}
   m_Layer: 0
-  m_Name: FlatPlatform
+  m_Name: CliffPlatform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,8 +29,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5503438706588928612}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 23.282091, y: 3.8037064, z: 1}
+  m_LocalPosition: {x: 0, y: -4.068, z: 0}
+  m_LocalScale: {x: 23.282091, y: 11.940627, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -86,18 +86,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &-2434951771821556030
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5503438706588928612}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9671a7c38db41a444914173280f44b76, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1537040768587295475
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -158,3 +146,16 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &-7418967880094962075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5503438706588928612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b06adb9ad36c9ca408f40856bf67d057, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  terrainType: 1

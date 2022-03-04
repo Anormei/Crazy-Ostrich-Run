@@ -9,6 +9,12 @@ public class Spawner : MonoBehaviour
     public GameObject objectToSpawn;
     public int maxPoolSize;
 
+    [Header("Odds to spawn")]
+    public int odds;
+    public int outOf;
+
+
+
     private PoolFactory<GameObject> poolFactory;
     private List<GameObject> objects = new List<GameObject>();
 

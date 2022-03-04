@@ -15,6 +15,8 @@ GameObject:
   - component: {fileID: 2133538899780736712}
   - component: {fileID: 8593667583423233164}
   - component: {fileID: 6020319591402879985}
+  - component: {fileID: 1204697520}
+  - component: {fileID: 1204697527}
   m_Layer: 0
   m_Name: Ostrich
   m_TagString: Untagged
@@ -163,7 +165,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   game: {fileID: 0}
-  slideAnimation: {fileID: 0}
+  animator: {fileID: 0}
+  slideForce: 200
+  slideKnockBack: 0
+  slideEndLag: 0.6
 --- !u!95 &6020319591402879985
 Animator:
   serializedVersion: 3
@@ -183,3 +188,88 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1204697520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8593667583644279330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d417cb4094bae74d976002e8ee0f915, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  holdSlide:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8593667583423233164}
+        m_TargetAssemblyTypeName: Slide, Assembly-CSharp
+        m_MethodName: holdSlide
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  releaseSlide:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8593667583423233164}
+        m_TargetAssemblyTypeName: Slide, Assembly-CSharp
+        m_MethodName: releaseSlide
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  holdFastFall:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1204697527}
+        m_TargetAssemblyTypeName: FastFall, Assembly-CSharp
+        m_MethodName: holdFastFall
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  releaseFastFall:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1204697527}
+        m_TargetAssemblyTypeName: FastFall, Assembly-CSharp
+        m_MethodName: releaseFastFall
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1204697527
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8593667583644279330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3fa0c335a8792348887fed436866587, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fastFallGravityScale: 4

@@ -58,6 +58,7 @@
     <Compile Include="Assets\Utilities\DefaultParams.cs" />
     <Compile Include="Assets\General Scripts\SpawnAttacher.cs" />
     <Compile Include="Assets\Character\Controls\FastFall.cs" />
+    <Compile Include="Assets\Character\Controls\PlayerAction.cs" />
     <Compile Include="Assets\Utilities\PoolFactory.cs" />
     <Compile Include="Assets\Utilities\ExtensionMethods.cs" />
     <Compile Include="Assets\General Scripts\Spawner.cs" />
@@ -65,9 +66,11 @@
     <Compile Include="Assets\GameHandler\GameHandler.cs" />
     <Compile Include="Assets\Character\Controls\Jump.cs" />
     <Compile Include="Assets\GameHandler\ObjectScroller.cs" />
+    <Compile Include="Assets\Platforms\Scripts\PlatformGenerator.cs" />
     <Compile Include="Assets\GameHandler\TerrainGenerator.cs" />
     <Compile Include="Assets\Character\Controls\Slide.cs" />
-    <Compile Include="Assets\Character\Controls\PlayerAction.cs" />
+    <Compile Include="Assets\Platforms\Scripts\PlatformOdds.cs" />
+    <Compile Include="Assets\Platforms\Scripts\PlatformGeneratorEditor.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
