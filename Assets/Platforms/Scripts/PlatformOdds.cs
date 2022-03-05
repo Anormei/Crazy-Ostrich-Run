@@ -1,14 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static PlatformGenerator;
 
-public class PlatformOdds
+public class PlatformOdds : MonoBehaviour
 {
+
+    public Spawner spawner;
+    public float oddsOf;
+
+
     // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
 
-    public TerrainType terrainType = TerrainType.Flat;
-
-    public int odds = 0;
-    public int outOf = 0;
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
 }
