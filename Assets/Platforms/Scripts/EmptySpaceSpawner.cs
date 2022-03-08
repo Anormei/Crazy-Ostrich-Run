@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NextSpawner : MonoBehaviour
+public class EmptySpaceSpawner : MonoBehaviour
 {
 
-    public Spawner defaultToSpawnNext;
-    public PlatformOdds[] nextToSpawn;
+    private float minimumSpace;
+
+    private float maximumSpace;
 
     // Start is called before the first frame update
     void Start()

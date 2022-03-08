@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlatformOdds : MonoBehaviour
+[System.Serializable]
+public class PlatformOdds : ScriptableObject
 {
 
     public Spawner spawner;
-    public float oddsOf;
+    public int odds;
+    public int outOf;
 
 
     // Start is called before the first frame update
@@ -19,5 +21,14 @@ public class PlatformOdds : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public Spawner roll()
+    {
+        int lottery = Random.Range(1, outOf + 1);
+        if (lottery <= odds)
+            return spawner;
+
+        return null;
     }
 }

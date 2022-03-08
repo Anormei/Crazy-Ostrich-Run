@@ -8,6 +8,8 @@ public class TerrainGenerator : MonoBehaviour
     [SerializeField]
     private GameHandler game;
     [SerializeField]
+    private Spawner emptySpaceSpawner;
+    [SerializeField]
     private GameObject startingPlatform;
     [SerializeField]
     private Spawner flatPlatformSpawner;
@@ -15,6 +17,11 @@ public class TerrainGenerator : MonoBehaviour
     private Spawner endPlatformSpawner;
     private Spawner cliffSpawner;
     private Spawner rockTowerSpawner;
+
+    [SerializeField]
+    private float minEmptySpace;
+    [SerializeField]
+    private float maxEmptySpace;
 
     private List<GameObject> terrain = new List<GameObject>();
 
@@ -33,11 +40,16 @@ public class TerrainGenerator : MonoBehaviour
         handleEndTerrain();
     }
 
+    public GameObject getFrontEnd()
+    {
+        return terrain[terrain.Count - 1];
+    }
+
     private void handleEndTerrain()
     {
         GameObject land = terrain[0];
 
-        if (land.rightBound() < game.World.xMin)
+        if (rightEdgeOffScreen(land))
         {
             land.GetComponent<SpawnAttacher>().delete();
             terrain.RemoveAt(0);
@@ -49,36 +61,33 @@ public class TerrainGenerator : MonoBehaviour
     {
         GameObject land = terrain[terrain.Count - 1];
 
-        if (land.rightBound() < game.World.xMax)
+        if (rightEdgeOnScreen(land))
         {
-            spawnFlatPlatform(land);
+            generateTerrain(land);
         }
     }
 
     private void generateTerrain(GameObject land)
     {
-        PlatformGenerator platform = land.GetComponent<PlatformGenerator>();
-        TerrainType type = platform.terrainType;
+        Spawner spawner = getNextSpawner(land);
 
-        switch (type)
+        float offsetX = 0;
+
+        if(spawner == emptySpaceSpawner)
         {
-            case TerrainType.End:
-                break;
-            case TerrainType.Tower:
-                break;
-            default:
-                break;
+            offsetX = randOffset();
+            spawner = spawner.GetComponent<NextPlatformHandler>().getNext();
         }
-    }
 
-    private void spawnFlatPlatform(GameObject land)
-    {
-        terrain.Add(flatPlatformSpawner.createObject((obj) =>
+        terrain.Add(spawner.createObject((obj) =>
         {
             obj.GetComponent<ObjectScroller>().game = game;
             obj.transform.parent = transform;
             obj.transform.gameObject.SetActive(true);
-            obj.transform.position = new Vector3(land.rightBound() + obj.halfWidth(), land.transform.position.y, 0);
+
+            positionAtEnd(obj, offsetX);
+
+
         }));
     }
 
@@ -88,4 +97,50 @@ public class TerrainGenerator : MonoBehaviour
         obj.GetComponent<SpawnAttacher>().Spawner = spawner;
     }
 
+    private Spawner getSpawner(GameObject obj)
+    {
+        return obj.GetComponent<SpawnAttacher>().Spawner;
+    }
+
+    private NextPlatformHandler getNextPlatformHandler(GameObject obj)
+    {
+        return getSpawner(obj).GetComponent<NextPlatformHandler>();
+    }
+
+    private Spawner getNextSpawner(GameObject obj)
+    {
+        return getNextPlatformHandler(obj).getNext();
+    }
+
+    private void positionAtEnd(GameObject obj, float offset)
+    {
+        GameObject land = terrain[terrain.Count - 1];
+
+        obj.transform.position = new Vector3(land.rightBound() + obj.halfWidth() + offset, land.transform.position.y - (obj.halfHeight() - land.halfHeight()), 0);
+    }
+
+    private bool rightEdgeOnScreen(GameObject obj)
+    {
+        return obj.rightBound() < game.World.xMax;
+    }
+
+    private bool rightEdgeOffScreen(GameObject obj)
+    {
+        return obj.rightBound() < game.World.xMin;
+    }
+
+    private float randOffset()
+    {
+        return Random.Range(minEmptySpace, maxEmptySpace);
+    }
+
+    private bool hasPhysicalBody(GameObject obj)
+    {
+        return obj.GetComponent<Rigidbody2D>() != null;
+    }
+
+    private void matchElevation(GameObject obj, float offset)
+    {
+
+    }
 }
