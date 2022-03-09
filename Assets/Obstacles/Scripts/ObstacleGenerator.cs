@@ -91,10 +91,7 @@ public class ObstacleGenerator : MonoBehaviour
             return;
         }
 
-        float offset = randOffset(obj.width());
-
-        obj.transform.position = new Vector3(placeOnUnseenPlatform(obj) + offset, placeOnTopOfPlatform(obj), 0);
-        minOffset = offset + obj.width();
+        obj.transform.position = new Vector3(placeUnseen(obj), placeOnTopOfPlatform(obj), 0);
     }
 
     private void generateNewTime()
@@ -102,25 +99,24 @@ public class ObstacleGenerator : MonoBehaviour
         generationTime = Random.Range(minGenerationTime, maxGenerationTime);
     }
 
-    private float placeOnUnseenPlatform(GameObject obj)
+    private float placeUnseen(GameObject obj)
     {
-        return game.World.x + obj.halfWidth();
+        BoundsCalculator bounds = platformToPlace.GetComponent<BoundsCalculator>();
+        float posX = bounds.leftBound() > game.World.xMax ? bounds.leftBound() : game.World.xMax;
+        
+        return posX + obj.halfWidth();
     }
 
     private float placeOnTopOfPlatform(GameObject obj)
     {
         Vector3 platformPos = platformToPlace.transform.position;
-        return platformPos.y - (obj.halfHeight() - platformToPlace.halfHeight());
-    }
-
-    private float randOffset(float widthOfObstacle)
-    {
-        return Random.Range(minOffset, maxOffset - widthOfObstacle);
+        return platformPos.y + platformToPlace.halfHeight() + obj.halfHeight();
     }
 
     private float getAvailableSpace()
     {
-        return maxOffset - minOffset;
+        BoundsCalculator bounds = platformToPlace.GetComponent<BoundsCalculator>();
+        return bounds.rightBound() - game.World.xMax;
     }
 
     private bool canFitOnPlatform(GameObject obj)
@@ -132,6 +128,6 @@ public class ObstacleGenerator : MonoBehaviour
     private bool leftScreen(GameObject obj)
     {
         BoundsCalculator bounds = obj.GetComponent<BoundsCalculator>();
-        return bounds.rightBound() < game.World.x;
+        return bounds.rightBound() < game.World.xMin;
     }
 }
