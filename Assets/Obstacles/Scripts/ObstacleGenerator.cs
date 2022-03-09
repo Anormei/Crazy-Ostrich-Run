@@ -105,42 +105,47 @@ public class ObstacleGenerator : MonoBehaviour
 
     private float placeUnseen(GameObject obj)
     {
-        BoundsCalculator bounds = platformToPlace.GetComponent<BoundsCalculator>();
-        float posX = bounds.leftBound() > game.World.xMax ? bounds.leftBound() : game.World.xMax;
+        float posX = bounds(platformToPlace).leftBound() > game.World.xMax ? bounds(platformToPlace).leftBound() : game.World.xMax;
 
         if(obstacles.Count > 0)
         {
-            BoundsCalculator obstacleBounds = obstacles[0].GetComponent<BoundsCalculator>();
-            posX = obstacleBounds.rightBound() > posX ? obstacleBounds.rightBound() : posX;
+            GameObject obstacle = obstacles[0];
+            posX = bounds(obstacle).rightBound() > posX ? bounds(obstacle).rightBound() : posX;
         }
         
-        return posX + bounds.halfWidth();
+        return posX + bounds(obj).halfWidth();
     }
 
     private float placeOnTopOfPlatform(GameObject obj)
     {
         Vector3 platformPos = platformToPlace.transform.position;
-        BoundsCalculator objBounds = obj.GetComponent<BoundsCalculator>();
-        BoundsCalculator platformBounds = platformToPlace.GetComponent<BoundsCalculator>();
 
-        return platformPos.y + platformBounds.halfHeight() + objBounds.halfHeight();
+        return platformPos.y + bounds(platformToPlace).halfHeight() + bounds(obj).halfHeight();
     }
 
     private float getAvailableSpace()
     {
-        BoundsCalculator bounds = platformToPlace.GetComponent<BoundsCalculator>();
-        return bounds.rightBound() - game.World.xMax;
+        float closest = bounds(platformToPlace).rightBound();
+        if(obstacles.Count > 0)
+        {
+            GameObject lastObstacle = obstacles[obstacles.Count - 1];
+            closest = bounds(lastObstacle).rightBound() > closest ? bounds(lastObstacle).rightBound() : closest;
+        }
+        return closest - game.World.xMax;
     }
 
     private bool canFitOnPlatform(GameObject obj)
     {
-        BoundsCalculator bounds = obj.GetComponent<BoundsCalculator>();
-        return bounds.width() < getAvailableSpace();
+        return bounds(obj).width() < getAvailableSpace();
     }
 
     private bool leftScreen(GameObject obj)
     {
-        BoundsCalculator bounds = obj.GetComponent<BoundsCalculator>();
-        return bounds.rightBound() < game.World.xMin;
+        return bounds(obj).rightBound() < game.World.xMin;
+    }
+
+    private BoundsCalculator bounds(GameObject obj)
+    {
+        return obj.GetComponent<BoundsCalculator>();
     }
 }
