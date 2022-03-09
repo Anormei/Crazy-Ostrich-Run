@@ -10,40 +10,101 @@ public class ObstacleGenerator : MonoBehaviour
     private TerrainGenerator terrainGenerator;
     [SerializeField]
     private float maxObstacles;
+    [SerializeField]
+    private float minGenerationTime;
+    [SerializeField]
+    private float maxGenerationTime;
+    [SerializeField]
+    private Spawner[] spawners;
+
+    private float generationTime;
 
     private GameObject platformToPlace;
     private float minOffset;
-    private float offsetMax;
+    private float maxOffset;
 
+    private List<GameObject> obstacles = new List<GameObject>();
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        generateNewTime();
     }
 
     // Update is called once per frame
     void Update()
     {
+        handleActiveObstacles();
+        generationTime -= Time.deltaTime;
+
         if (platformToPlace != terrainGenerator.getFrontEnd())
         {
             platformToPlace = terrainGenerator.getFrontEnd();
             minOffset = 0;
-            offsetMax = platformToPlace.width();
+            maxOffset = platformToPlace.width();
         }
+
+        if(generationTime <= 0)
+        {
+            GameObject obstacle = generateObstacle();
+            attachToPlatform(obstacle);
+            generateNewTime();
+        }
+
     }
 
-    public void attachToPlatform(GameObject obj)
+    public GameObject generateObstacle()
     {
-        
+        Spawner spawner = spawners[Random.Range(0, spawners.Length)];
+        GameObject obstacle = spawner.createObject((obj) =>
+        {
+            obj.GetComponent<ObjectScroller>().game = game;
+            obj.transform.parent = transform;
+            obj.transform.gameObject.SetActive(true);
+        });
 
-        obj.transform.position = new Vector3(placeAtPlatformLeftEdge(obj) + randOffset(), placeOnTopOfPlatform(obj), 0);
-        minOffset = obj.width();
+        obstacles.Add(obstacle);
+        return obstacle;
     }
 
-    private float placeAtPlatformLeftEdge(GameObject obj)
+    public void handleActiveObstacles()
     {
-        return platformToPlace.leftBound() + obj.halfWidth();
+        if(obstacles.Count == 0)
+            return;
+       
+        GameObject obstacle = obstacles[0];
+
+        if (leftScreen(obstacle))
+        {
+            obstacle.GetComponent<SpawnAttacher>().delete();
+            obstacles.RemoveAt(0);
+        }
+
+    }
+
+    private void attachToPlatform(GameObject obj)
+    {
+        if (!canFitOnPlatform(obj))
+        {
+            obj.GetComponent<SpawnAttacher>().delete();
+            obstacles.Remove(obj);
+            return;
+        }
+
+        float offset = randOffset(obj.width());
+
+        obj.transform.position = new Vector3(placeOnUnseenPlatform(obj) + offset, placeOnTopOfPlatform(obj), 0);
+        minOffset = offset + obj.width();
+    }
+
+    private void generateNewTime()
+    {
+        generationTime = Random.Range(minGenerationTime, maxGenerationTime);
+    }
+
+    private float placeOnUnseenPlatform(GameObject obj)
+    {
+        return game.World.x + obj.halfWidth();
     }
 
     private float placeOnTopOfPlatform(GameObject obj)
@@ -52,9 +113,25 @@ public class ObstacleGenerator : MonoBehaviour
         return platformPos.y - (obj.halfHeight() - platformToPlace.halfHeight());
     }
 
-    private float randOffset()
+    private float randOffset(float widthOfObstacle)
     {
-        return Random.Range(minOffset, offsetMax);
+        return Random.Range(minOffset, maxOffset - widthOfObstacle);
     }
 
+    private float getAvailableSpace()
+    {
+        return maxOffset - minOffset;
+    }
+
+    private bool canFitOnPlatform(GameObject obj)
+    {
+        BoundsCalculator bounds = obj.GetComponent<BoundsCalculator>();
+        return bounds.width() < getAvailableSpace();
+    }
+
+    private bool leftScreen(GameObject obj)
+    {
+        BoundsCalculator bounds = obj.GetComponent<BoundsCalculator>();
+        return bounds.rightBound() < game.World.x;
+    }
 }

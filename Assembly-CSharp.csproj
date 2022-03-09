@@ -75,6 +75,8 @@
     <Compile Include="Assets\Platforms\Scripts\NextPlatformHandler.cs" />
     <Compile Include="Assets\EmptyProperties.cs" />
     <Compile Include="Assets\Obstacles\Scripts\ObstacleGenerator.cs" />
+    <Compile Include="Assets\General Scripts\BoundsCalculator.cs" />
+    <Compile Include="Assets\General Scripts\ModelBounds.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

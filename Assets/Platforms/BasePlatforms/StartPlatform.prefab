@@ -14,8 +14,9 @@ GameObject:
   - component: {fileID: 7014175645257354387}
   - component: {fileID: 469955533372184727}
   - component: {fileID: -7418967880094962075}
+  - component: {fileID: -3057512075107703291}
   m_Layer: 0
-  m_Name: EndPlatform
+  m_Name: StartPlatform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -159,3 +160,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   terrainType: 2
+--- !u!114 &-3057512075107703291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5503438706588928612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12e1ce39e4573aa4a883c919c36cec1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

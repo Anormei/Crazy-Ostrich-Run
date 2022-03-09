@@ -36,8 +36,11 @@ public class TerrainGenerator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        handleFrontTerrain();
-        handleEndTerrain();
+        if (terrain.Count > 0)
+        {
+            handleFrontTerrain();
+            handleEndTerrain();
+        }
     }
 
     public GameObject getFrontEnd()
@@ -86,8 +89,6 @@ public class TerrainGenerator : MonoBehaviour
             obj.transform.gameObject.SetActive(true);
 
             positionAtEnd(obj, offsetX);
-
-
         }));
     }
 
@@ -121,12 +122,14 @@ public class TerrainGenerator : MonoBehaviour
 
     private bool rightEdgeOnScreen(GameObject obj)
     {
-        return obj.rightBound() < game.World.xMax;
+        BoundsCalculator bounds = obj.GetComponent<BoundsCalculator>();
+        return bounds.rightBound() < game.World.xMax;
     }
 
     private bool rightEdgeOffScreen(GameObject obj)
     {
-        return obj.rightBound() < game.World.xMin;
+        BoundsCalculator bounds = obj.GetComponent<BoundsCalculator>();
+        return bounds.rightBound() < game.World.xMin;
     }
 
     private float randOffset()
