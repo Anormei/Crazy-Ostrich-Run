@@ -116,8 +116,10 @@ public class TerrainGenerator : MonoBehaviour
     private void positionAtEnd(GameObject obj, float offset)
     {
         GameObject land = terrain[terrain.Count - 1];
+        BoundsCalculator objBounds = obj.GetComponent<BoundsCalculator>();
+        BoundsCalculator landBounds = land.GetComponent<BoundsCalculator>();
 
-        obj.transform.position = new Vector3(land.rightBound() + obj.halfWidth() + offset, land.transform.position.y - (obj.halfHeight() - land.halfHeight()), 0);
+        obj.transform.position = new Vector3(landBounds.rightBound() + objBounds.halfWidth() + offset, land.transform.position.y - (objBounds.halfHeight() - landBounds.halfHeight()), 0);
     }
 
     private bool rightEdgeOnScreen(GameObject obj)

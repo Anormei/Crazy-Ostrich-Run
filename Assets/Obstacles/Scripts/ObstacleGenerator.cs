@@ -15,6 +15,10 @@ public class ObstacleGenerator : MonoBehaviour
     [SerializeField]
     private float maxGenerationTime;
     [SerializeField]
+    private float edgePadding;
+    [SerializeField]
+    private float obstaclePadding;
+    [SerializeField]
     private Spawner[] spawners;
 
     private float generationTime;
@@ -103,14 +107,23 @@ public class ObstacleGenerator : MonoBehaviour
     {
         BoundsCalculator bounds = platformToPlace.GetComponent<BoundsCalculator>();
         float posX = bounds.leftBound() > game.World.xMax ? bounds.leftBound() : game.World.xMax;
+
+        if(obstacles.Count > 0)
+        {
+            BoundsCalculator obstacleBounds = obstacles[0].GetComponent<BoundsCalculator>();
+            posX = obstacleBounds.rightBound() > posX ? obstacleBounds.rightBound() : posX;
+        }
         
-        return posX + obj.halfWidth();
+        return posX + bounds.halfWidth();
     }
 
     private float placeOnTopOfPlatform(GameObject obj)
     {
         Vector3 platformPos = platformToPlace.transform.position;
-        return platformPos.y + platformToPlace.halfHeight() + obj.halfHeight();
+        BoundsCalculator objBounds = obj.GetComponent<BoundsCalculator>();
+        BoundsCalculator platformBounds = platformToPlace.GetComponent<BoundsCalculator>();
+
+        return platformPos.y + platformBounds.halfHeight() + objBounds.halfHeight();
     }
 
     private float getAvailableSpace()
