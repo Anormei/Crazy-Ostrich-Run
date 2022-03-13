@@ -40,19 +40,20 @@ public class ObstacleGenerator : MonoBehaviour
     {
         handleActiveObstacles();
         generationTime -= Time.deltaTime;
-
-        if (platformToPlace != terrainGenerator.getFrontEnd())
+        platformToPlace = terrainGenerator.getFrontEnd();
+        /*if (platformToPlace != terrainGenerator.getFrontEnd())
         {
-            platformToPlace = terrainGenerator.getFrontEnd();
+
             minOffset = 0;
             maxOffset = platformToPlace.width();
-        }
+        }*/
 
         if(generationTime <= 0)
         {
             GameObject obstacle = generateObstacle();
             attachToPlatform(obstacle);
             generateNewTime();
+            
         }
 
     }
@@ -90,10 +91,13 @@ public class ObstacleGenerator : MonoBehaviour
     {
         if (!canFitOnPlatform(obj))
         {
+            Debug.Log("Cannot generate obstacle... awaiting...");
             obj.GetComponent<SpawnAttacher>().delete();
             obstacles.Remove(obj);
             return;
         }
+
+        Debug.Log("Generating new obstacle...");
 
         obj.transform.position = new Vector3(placeUnseen(obj), placeOnTopOfPlatform(obj), 0);
     }
@@ -105,15 +109,33 @@ public class ObstacleGenerator : MonoBehaviour
 
     private float placeUnseen(GameObject obj)
     {
-        float posX = bounds(platformToPlace).leftBound() > game.World.xMax ? bounds(platformToPlace).leftBound() : game.World.xMax;
+        float posX = game.World.xMax;
+        float platformLeftBound = bounds(platformToPlace).leftBound();
 
-        if(obstacles.Count > 0)
+        if (platformLeftBound > posX)
         {
-            GameObject obstacle = obstacles[0];
-            posX = bounds(obstacle).rightBound() > posX ? bounds(obstacle).rightBound() : posX;
+
+            posX = platformLeftBound;
+
+            posX += applyOffset(obj, posX);
         }
-        
+
+        if (obstacles.Count > 0)
+        {
+            GameObject obstacle = obstacles[obstacles.Count - 1];
+            float obstacleRightBound = bounds(obstacle).rightBound();
+
+            posX = obstacleRightBound > posX ? obstacleRightBound : posX;
+        }
+
+
         return posX + bounds(obj).halfWidth();
+    }
+
+    // TODO fix
+    private float applyOffset(GameObject obj, float startingPosX)
+    {
+        return Random.Range(0, getAvailableSpace() - bounds(obj).width());
     }
 
     private float placeOnTopOfPlatform(GameObject obj)
@@ -125,13 +147,27 @@ public class ObstacleGenerator : MonoBehaviour
 
     private float getAvailableSpace()
     {
-        float closest = bounds(platformToPlace).rightBound();
-        if(obstacles.Count > 0)
+        float furthest = getFurthestPoint();
+
+        return bounds(platformToPlace).rightBound() - furthest;
+    }
+
+    private float getFurthestPoint()
+    {
+        float posX = game.World.xMax;
+        float platformLeftBound = bounds(platformToPlace).leftBound();
+
+        posX = platformLeftBound > posX ? platformLeftBound : posX;
+
+        if (obstacles.Count > 0)
         {
-            GameObject lastObstacle = obstacles[obstacles.Count - 1];
-            closest = bounds(lastObstacle).rightBound() > closest ? bounds(lastObstacle).rightBound() : closest;
+            GameObject obstacle = obstacles[obstacles.Count - 1];
+            float obstacleRightBound = bounds(obstacle).rightBound();
+
+            posX = obstacleRightBound > posX ? obstacleRightBound : posX;
         }
-        return closest - game.World.xMax;
+
+        return posX;
     }
 
     private bool canFitOnPlatform(GameObject obj)
@@ -141,7 +177,7 @@ public class ObstacleGenerator : MonoBehaviour
 
     private bool leftScreen(GameObject obj)
     {
-        return bounds(obj).rightBound() < game.World.xMin;
+        return bounds(obj).rightBound() < game.World.xMin || bounds(obj).topBound() < game.World.yMin;
     }
 
     private BoundsCalculator bounds(GameObject obj)
