@@ -51,7 +51,20 @@ public class ObstacleGenerator : MonoBehaviour
         if(generationTime <= 0 && !reachedObstacleLimit())
         {
             GameObject obstacle = generateObstacle();
-            attachToPlatform(obstacle);
+            ObstacleBlocker obstacleBlocker = platformToPlace
+                .GetComponent<SpawnAttacher>().Spawner
+                .GetComponent<ObstacleBlocker>();
+
+            if (obstacleBlocker != null && obstacleBlocker.isIllegal(obstacle))
+            {
+                obstacle.GetComponent<SpawnAttacher>().delete();
+                obstacles.Remove(obstacle);
+                Debug.Log("Obstacle is illegal, removing...");
+            }
+            else
+            {
+                attachToPlatform(obstacle);
+            }
             generateNewTime();
             
         }
@@ -188,4 +201,5 @@ public class ObstacleGenerator : MonoBehaviour
     {
         return obj.GetComponent<BoundsCalculator>();
     }
+
 }

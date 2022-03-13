@@ -25,6 +25,11 @@ public class SpawnAttacher : MonoBehaviour
         
     }
 
+    public bool isSpawnedBy(Spawner spawner)
+    {
+        return spawner == this.spawner;
+    }
+
     public void delete()
     {
         gameObject.SetActive(false);

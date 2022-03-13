@@ -267,7 +267,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f88724ffa7cffa44bb03cf8d029a09ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultToSpawnNext: {fileID: 0}
+  defaultToSpawnNext: {fileID: 923382779}
   platformOdds: []
 --- !u!4 &161026023
 Transform:
@@ -359,6 +359,21 @@ MonoBehaviour:
   defaultToSpawnNext: {fileID: 376568334}
   platformOdds:
   - {fileID: 320682669}
+--- !u!114 &435112077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7cf4ac5e5b8fe445b5980020f5943f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawner: {fileID: 1348829389}
+  odds: 1
+  outOf: 2
 --- !u!1 &479776231 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5503438706588928612, guid: 4acd04f7155fc2f438937d2b01e0205a, type: 3}
@@ -706,7 +721,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   game: {fileID: 1573034574}
-  emptySpaceSpawner: {fileID: 0}
+  emptySpaceSpawner: {fileID: 923382779}
   startingPlatform: {fileID: 479776231}
   flatPlatformSpawner: {fileID: 376568334}
   endPlatformSpawner: {fileID: 0}
@@ -852,6 +867,67 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 904494566}
   m_CullTransparentMesh: 0
+--- !u!1 &923382777
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 923382778}
+  - component: {fileID: 923382779}
+  - component: {fileID: 923382780}
+  m_Layer: 0
+  m_Name: EmptySpaceSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &923382778
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 923382777}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1337342659}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &923382779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 923382777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcf42cc7e7b51154c946499b78073761, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectToSpawn: {fileID: 0}
+  maxPoolSize: 0
+--- !u!114 &923382780
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 923382777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f88724ffa7cffa44bb03cf8d029a09ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultToSpawnNext: {fileID: 761955596}
+  platformOdds:
+  - {fileID: 435112077}
 --- !u!1 &1337342658
 GameObject:
   m_ObjectHideFlags: 0
@@ -883,6 +959,7 @@ Transform:
   - {fileID: 161026023}
   - {fileID: 761955598}
   - {fileID: 1348829387}
+  - {fileID: 923382778}
   m_Father: {fileID: 744069559}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -897,6 +974,7 @@ GameObject:
   - component: {fileID: 1348829387}
   - component: {fileID: 1348829389}
   - component: {fileID: 1348829388}
+  - component: {fileID: 1348829390}
   m_Layer: 0
   m_Name: TowerPlatformSpawner
   m_TagString: Untagged
@@ -930,7 +1008,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f88724ffa7cffa44bb03cf8d029a09ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultToSpawnNext: {fileID: 0}
+  defaultToSpawnNext: {fileID: 923382779}
   platformOdds: []
 --- !u!114 &1348829389
 MonoBehaviour:
@@ -946,6 +1024,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectToSpawn: {fileID: 5503438706588928612, guid: 45a0ffbe77c936241ad2da3998ed439b, type: 3}
   maxPoolSize: 5
+--- !u!114 &1348829390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1348829386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d451f693082b4074c9342fe97f9fd054, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawners:
+  - {fileID: 1445817812}
+  - {fileID: 1412484206}
 --- !u!1 &1387075091
 GameObject:
   m_ObjectHideFlags: 0

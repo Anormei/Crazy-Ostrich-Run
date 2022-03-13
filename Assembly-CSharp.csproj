@@ -76,6 +76,7 @@
     <Compile Include="Assets\EmptyProperties.cs" />
     <Compile Include="Assets\Platforms\Scripts\NextPlatformHandler.cs" />
     <Compile Include="Assets\UnityEditor\GameObjectCustomMenu.cs" />
+    <Compile Include="Assets\Platforms\Scripts\ObstacleBlocker.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
