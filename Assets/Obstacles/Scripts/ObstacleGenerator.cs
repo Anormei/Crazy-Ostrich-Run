@@ -15,9 +15,9 @@ public class ObstacleGenerator : MonoBehaviour
     [SerializeField]
     private float maxGenerationTime;
     [SerializeField]
-    private float edgePadding;
+    private float edgeMargin;
     [SerializeField]
-    private float obstaclePadding;
+    private float obstacleMargin;
     [SerializeField]
     private Spawner[] spawners;
 
