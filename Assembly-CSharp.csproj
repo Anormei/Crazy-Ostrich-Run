@@ -67,16 +67,17 @@
     <Compile Include="Assets\GameHandler\GameStart.cs" />
     <Compile Include="Assets\GameHandler\GameHandler.cs" />
     <Compile Include="Assets\Character\Controls\Jump.cs" />
+    <Compile Include="Assets\General Scripts\BoundsCalculator.cs" />
     <Compile Include="Assets\GameHandler\ObjectScroller.cs" />
+    <Compile Include="Assets\Obstacles\Scripts\ObstacleGenerator.cs" />
     <Compile Include="Assets\Platforms\Scripts\PlatformGenerator.cs" />
     <Compile Include="Assets\GameHandler\TerrainGenerator.cs" />
     <Compile Include="Assets\Platforms\Scripts\NextPlatformHandlerEditor.cs" />
     <Compile Include="Assets\Character\Controls\Slide.cs" />
-    <Compile Include="Assets\Platforms\Scripts\NextPlatformHandler.cs" />
-    <Compile Include="Assets\EmptyProperties.cs" />
-    <Compile Include="Assets\Obstacles\Scripts\ObstacleGenerator.cs" />
-    <Compile Include="Assets\General Scripts\BoundsCalculator.cs" />
     <Compile Include="Assets\General Scripts\ModelBounds.cs" />
+    <Compile Include="Assets\EmptyProperties.cs" />
+    <Compile Include="Assets\Platforms\Scripts\NextPlatformHandler.cs" />
+    <Compile Include="Assets\UnityEditor\GameObjectCustomMenu.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

@@ -1466,7 +1466,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1725693567}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.58555275, y: -0.1587453, z: -0.544567}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 624793764}
@@ -1480,7 +1480,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1725693567}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 345577f91484ec0498b649faa5b018e7, type: 3}
   m_Name: 
@@ -1489,9 +1489,12 @@ MonoBehaviour:
   terrainGenerator: {fileID: 744069560}
   maxObstacles: 5
   minGenerationTime: 0
-  maxGenerationTime: 10
+  maxGenerationTime: 5
+  edgePadding: 0
+  obstaclePadding: 0
   spawners:
   - {fileID: 1412484206}
+  - {fileID: 1445817812}
 --- !u!114 &1765064248 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1204697520, guid: 3a2b5f41d0e592d47ab7807f01e4a377, type: 3}
