@@ -57,7 +57,6 @@
   <ItemGroup>
     <Compile Include="Assets\Utilities\DefaultParams.cs" />
     <Compile Include="Assets\General Scripts\SpawnAttacher.cs" />
-    <Compile Include="Assets\Platforms\Scripts\EmptySpaceSpawner.cs" />
     <Compile Include="Assets\Character\Controls\FastFall.cs" />
     <Compile Include="Assets\Character\Controls\PlayerAction.cs" />
     <Compile Include="Assets\Platforms\Scripts\PlatformOdds.cs" />
@@ -70,7 +69,6 @@
     <Compile Include="Assets\General Scripts\BoundsCalculator.cs" />
     <Compile Include="Assets\GameHandler\ObjectScroller.cs" />
     <Compile Include="Assets\Obstacles\Scripts\ObstacleGenerator.cs" />
-    <Compile Include="Assets\Platforms\Scripts\PlatformGenerator.cs" />
     <Compile Include="Assets\GameHandler\TerrainGenerator.cs" />
     <Compile Include="Assets\Platforms\Scripts\NextPlatformHandlerEditor.cs" />
     <Compile Include="Assets\Character\Controls\Slide.cs" />
