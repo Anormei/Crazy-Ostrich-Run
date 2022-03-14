@@ -8,24 +8,27 @@ public class ObjectScroller : MonoBehaviour
     public GameHandler game;
 
     private bool ready = false;
+    private Rigidbody2D rb;
 
     // Start is called before the first frame update
     void Start()
     {
-        if(game != null)
+        rb = GetComponent<Rigidbody2D>();
+
+        if(game != null && rb != null)
         {
             ready = true;
         }
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (!ready)
         {
             return;
         }
 
-        transform.Translate(Time.deltaTime * game.ScrollSpeed * GameHandler.SCROLL_DIRECTION, 0, 0);
+        rb.MovePosition(new Vector3(rb.position.x + game.ScrollSpeed * GameHandler.SCROLL_DIRECTION * Time.deltaTime, rb.position.y, 0));
     }
 }

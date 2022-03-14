@@ -1390,6 +1390,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fc5d3a81bc99244fb0e0c1fec509dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 1609576705}
+  centralizerRegenSpeed: 2
 --- !u!4 &1573034575
 Transform:
   m_ObjectHideFlags: 0
@@ -1506,8 +1508,8 @@ MonoBehaviour:
   maxObstacles: 5
   minGenerationTime: 0
   maxGenerationTime: 5
-  edgePadding: 0
-  obstaclePadding: 0
+  edgeMargin: 0
+  obstacleMargin: 0
   spawners:
   - {fileID: 1412484206}
   - {fileID: 1445817812}
@@ -1658,8 +1660,7 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: ae8550ddef41a7c438a5d2c881bde511, type: 3}
-    m_RemovedComponents:
-    - {fileID: 8593667583644279335, guid: 3a2b5f41d0e592d47ab7807f01e4a377, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3a2b5f41d0e592d47ab7807f01e4a377, type: 3}
 --- !u!1 &1886261388
 GameObject:
