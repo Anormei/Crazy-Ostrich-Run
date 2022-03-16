@@ -2,20 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObjectScroller : MonoBehaviour
+public class StaticScroller : MonoBehaviour
 {
-
     public GameHandler game;
-
     private bool ready = false;
-    private Rigidbody2D rb;
 
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
-
-        if(game != null && rb != null)
+        if (game != null)
         {
             ready = true;
         }
@@ -29,6 +24,6 @@ public class ObjectScroller : MonoBehaviour
             return;
         }
 
-        rb.MovePosition(new Vector3(rb.position.x + game.ScrollSpeed * GameHandler.SCROLL_DIRECTION * Time.deltaTime, rb.position.y, 0));
+        transform.Translate(new Vector3(game.ScrollSpeed * GameHandler.SCROLL_DIRECTION * Time.deltaTime, 0, 0));
     }
 }

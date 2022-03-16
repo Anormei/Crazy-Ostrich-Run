@@ -83,7 +83,7 @@ public class TerrainGenerator : MonoBehaviour
 
         terrain.Add(spawner.createObject((obj) =>
         {
-            obj.GetComponent<ObjectScroller>().game = game;
+            obj.GetComponent<StaticScroller>().game = game;
             obj.transform.parent = transform;
             obj.transform.gameObject.SetActive(true);
 

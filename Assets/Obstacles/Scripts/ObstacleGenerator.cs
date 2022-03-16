@@ -76,7 +76,7 @@ public class ObstacleGenerator : MonoBehaviour
         Spawner spawner = spawners[Random.Range(0, spawners.Length)];
         GameObject obstacle = spawner.createObject((obj) =>
         {
-            obj.GetComponent<ObjectScroller>().game = game;
+            obj.GetComponent<KinematicScroller>().game = game;
             obj.transform.parent = transform;
             obj.transform.gameObject.SetActive(true);
         });
