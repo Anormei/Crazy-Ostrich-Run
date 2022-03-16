@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 5503438706588928619}
   - component: {fileID: 5503438706588928618}
-  - component: {fileID: 1537040768587295475}
   - component: {fileID: 7014175645257354387}
   - component: {fileID: 469955533372184727}
   - component: {fileID: 2871378287067494125}
+  - component: {fileID: -3974994881288818517}
   m_Layer: 0
   m_Name: EndPlatform
   m_TagString: Untagged
@@ -86,19 +86,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1537040768587295475
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5503438706588928612}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa99e2c9d94d8e446b8bd2eeba11f652, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  game: {fileID: 0}
 --- !u!50 &7014175645257354387
 Rigidbody2D:
   serializedVersion: 4
@@ -107,7 +94,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5503438706588928612}
-  m_BodyType: 1
+  m_BodyType: 2
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -158,3 +145,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12e1ce39e4573aa4a883c919c36cec1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-3974994881288818517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5503438706588928612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cef48a93a16ffa04ba25576fa973ad6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  game: {fileID: 0}
