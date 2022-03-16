@@ -67,7 +67,7 @@
     <Compile Include="Assets\GameHandler\GameHandler.cs" />
     <Compile Include="Assets\Character\Controls\Jump.cs" />
     <Compile Include="Assets\General Scripts\BoundsCalculator.cs" />
-    <Compile Include="Assets\GameHandler\ObjectScroller.cs" />
+    <Compile Include="Assets\GameHandler\KinematicScroller.cs" />
     <Compile Include="Assets\Obstacles\Scripts\ObstacleGenerator.cs" />
     <Compile Include="Assets\GameHandler\TerrainGenerator.cs" />
     <Compile Include="Assets\Platforms\Scripts\NextPlatformHandlerEditor.cs" />
@@ -77,6 +77,8 @@
     <Compile Include="Assets\Platforms\Scripts\NextPlatformHandler.cs" />
     <Compile Include="Assets\UnityEditor\GameObjectCustomMenu.cs" />
     <Compile Include="Assets\Platforms\Scripts\ObstacleBlocker.cs" />
+    <Compile Include="Assets\GameHandler\StaticScroller.cs" />
+    <Compile Include="Assets\PlayerProperties.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
