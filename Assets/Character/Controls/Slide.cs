@@ -81,4 +81,9 @@ public class Slide : MonoBehaviour
         return rb.velocity.x <= 0;
     }
 
+    public bool isSliding()
+    {
+        return slideHeld || inEndLag;
+    }
+
 }
