@@ -15,11 +15,6 @@ public class GameHandler : MonoBehaviour
     public const float SCROLL_DIRECTION = Orientation.LEFT;
     public const float DEFAULT_SCROLL_SPEED = 10.0f;
 
-    [SerializeField]
-    private GameObject player;
-    [SerializeField]
-    private float centralizerRegenSpeed;
-
     private float scrollSpeed;
     private Rect screenDimensions;
 
@@ -57,14 +52,6 @@ public class GameHandler : MonoBehaviour
     private void FixedUpdate()
     {
 
-        Rigidbody2D rb = player.GetComponent<Rigidbody2D>();
-        Vector3 playerPos = rb.position;
-        if (playerPos.x < World.center.x)
-        {
-
-            Vector3 playerVelocity = rb.velocity;
-            rb.AddForce(new Vector3(centralizerRegenSpeed, 0, 0));
-        }
     }
 
     public void scrollFaster(float speed)
