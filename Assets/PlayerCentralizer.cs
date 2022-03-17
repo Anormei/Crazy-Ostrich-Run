@@ -8,11 +8,15 @@ public class PlayerCentralizer : MonoBehaviour
     [SerializeField]
     private float regenSpeed;
     [SerializeField]
+    private float regenCooldown;
+    [SerializeField]
     private GameHandler game;
     [SerializeField]
     private Rigidbody2D rigidBody;
     [SerializeField]
     private Slide slideAction;
+
+    private float currentCooldown = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -29,14 +33,36 @@ public class PlayerCentralizer : MonoBehaviour
     private void FixedUpdate()
     {
 
-        Vector3 playerPos = rigidBody.position;
-        if (playerPos.x < game.World.center.x && !slideAction.isSliding() && grounded())
+        if (positionedCenter() && running() && !inCooldown())
         {
 
             Vector3 playerVelocity = rigidBody.velocity;
             //rb.AddForce(new Vector3(centralizerRegenSpeed, 0, 0));
             rigidBody.velocity = new Vector3(regenSpeed, rigidBody.velocity.y, 0);
         }
+        else if(!inCooldown())
+        {
+            currentCooldown = regenCooldown;
+        }
+
+        currentCooldown -= Time.deltaTime;
+    }
+
+    private bool positionedCenter()
+    {
+
+        Vector3 playerPos = rigidBody.position;
+        return playerPos.x < game.World.center.x;
+    }
+
+    private bool running()
+    {
+        return !slideAction.isSliding() && grounded();
+    }
+
+    private bool inCooldown()
+    {
+        return currentCooldown > 0;
     }
 
     private bool grounded()

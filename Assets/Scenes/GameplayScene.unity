@@ -795,6 +795,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1834850030, guid: fafe8dfc85138ca4db69848e1f1cba21, type: 3}
+      propertyPath: game
+      value: 
+      objectReference: {fileID: 1573034574}
     - target: {fileID: 862400236244607465, guid: fafe8dfc85138ca4db69848e1f1cba21, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -843,6 +847,10 @@ PrefabInstance:
       propertyPath: game
       value: 
       objectReference: {fileID: 1573034574}
+    - target: {fileID: 5718503372468775603, guid: fafe8dfc85138ca4db69848e1f1cba21, type: 3}
+      propertyPath: slideEndLag
+      value: 0.8
+      objectReference: {fileID: 0}
     - target: {fileID: 6012748179186818550, guid: fafe8dfc85138ca4db69848e1f1cba21, type: 3}
       propertyPath: m_Name
       value: Ostrich

@@ -64,7 +64,6 @@
     <Compile Include="Assets\UnityEditor\GameObjectCustomMenu.cs" />
     <Compile Include="Assets\Platforms\Scripts\PlatformOdds.cs" />
     <Compile Include="Assets\Utilities\PoolFactory.cs" />
-    <Compile Include="Assets\PlayerProperties.cs" />
     <Compile Include="Assets\Utilities\ExtensionMethods.cs" />
     <Compile Include="Assets\General Scripts\Spawner.cs" />
     <Compile Include="Assets\GameHandler\GameStart.cs" />

@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 2247441854132333824}
   - component: {fileID: 6210972463350037643}
   - component: {fileID: 4665175764494230174}
+  - component: {fileID: 1834850030}
   m_Layer: 0
   m_Name: Body
   m_TagString: Untagged
@@ -255,6 +256,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 5235492793904636219}
   fastFallGravityScale: 4
+--- !u!114 &1834850030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2164204586178565731}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 146b6487788b8ca4184acac706926c86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  regenSpeed: 1
+  game: {fileID: 0}
+  rigidBody: {fileID: 5235492793904636219}
+  slideAction: {fileID: 5718503372468775603}
 --- !u!1 &6012748179186818550
 GameObject:
   m_ObjectHideFlags: 0
@@ -265,7 +282,6 @@ GameObject:
   m_Component:
   - component: {fileID: 862400236244607465}
   - component: {fileID: 5235492793904636219}
-  - component: {fileID: 1916771714}
   m_Layer: 0
   m_Name: Ostrich
   m_TagString: Untagged
@@ -309,17 +325,3 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &1916771714
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6012748179186818550}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31eabf56f0403e748990bc9dada17190, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerAction: {fileID: 6210972463350037643}
-  playerSlide: {fileID: 5718503372468775603}
