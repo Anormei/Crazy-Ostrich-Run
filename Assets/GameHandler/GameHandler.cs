@@ -16,15 +16,18 @@ public class GameHandler : MonoBehaviour
     public const float DEFAULT_SCROLL_SPEED = 10.0f;
 
     private float scrollSpeed;
+    private float finalScrollSpeed;
     private Rect screenDimensions;
 
     private float speedBoost;
-    private float speedBoostDuration;
+    private float speedBoostDecrease;
+
+    private float speedOffset = 0;
 
     public float ScrollSpeed
     {
-        get { return scrollSpeed; }
-        set { scrollSpeed = value; }
+        get { return finalScrollSpeed; }
+        set { finalScrollSpeed = value; }
     }
 
     public Rect World
@@ -51,22 +54,33 @@ public class GameHandler : MonoBehaviour
 
     private void FixedUpdate()
     {
+        finalScrollSpeed = scrollSpeed + speedOffset;
 
+        if (speedBoost > 0)
+        {
+            finalScrollSpeed += speedBoost;
+            speedBoost -= speedBoostDecrease * Time.deltaTime;
+        }
     }
 
     public void scrollFaster(float speed)
     {
-        scrollSpeed += speed;
+        finalScrollSpeed += speed;
     }
 
     public void scrollSlower(float speed)
     {
-        scrollSpeed -= speed;
+        finalScrollSpeed -= speed;
     }
 
     public void boostSpeed(float speed, float duration)
     {
         speedBoost = speed;
-        speedBoostDuration = duration;
+        speedBoostDecrease = speed / duration;
+    }
+
+    public bool hasSpeedBoost()
+    {
+        return speedBoost > 0;
     }
 }

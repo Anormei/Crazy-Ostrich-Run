@@ -15,6 +15,8 @@ public class Slide : MonoBehaviour
     [SerializeField]
     private float slideEndLag;
     [SerializeField]
+    private float slideTime;
+    [SerializeField]
     private Rigidbody2D rb;
 
     private bool slideHeld = false;
@@ -59,8 +61,11 @@ public class Slide : MonoBehaviour
         {
             return;
         }
-        rb.velocity = new Vector2(0.01f, 0);
-        rb.AddForce(new Vector2(slideForce, 0));
+        //rb.velocity = new Vector2(0.01f, 0);
+        // rb.AddForce(new Vector2(slideForce, 0));
+
+        game.boostSpeed(slideForce, slideTime);
+
         slideHeld = true;
         inEndLag = true;
         animator.SetBool("slide", true);
@@ -78,7 +83,8 @@ public class Slide : MonoBehaviour
 
     public bool hasNoForwardMotion()
     {
-        return rb.velocity.x <= 0;
+        //return rb.velocity.x <= 0;
+        return !game.hasSpeedBoost();
     }
 
     public bool isSliding()
