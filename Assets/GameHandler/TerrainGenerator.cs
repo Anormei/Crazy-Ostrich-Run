@@ -10,17 +10,21 @@ public class TerrainGenerator : MonoBehaviour
     private Spawner emptySpaceSpawner;
     [SerializeField]
     private GameObject startingPlatform;
-    [SerializeField]
-    private Spawner flatPlatformSpawner;
-    [SerializeField]
-    private Spawner endPlatformSpawner;
-    private Spawner cliffSpawner;
-    private Spawner rockTowerSpawner;
 
     [SerializeField]
     private float minEmptySpace;
     [SerializeField]
     private float maxEmptySpace;
+
+    [SerializeField]
+    private float minElevation;
+    [SerializeField]
+    private float maxElevation;
+
+    [SerializeField]
+    private int changeElevationOdds;
+    [SerializeField]
+    private int changeElevationOddsOf;
 
     private List<GameObject> terrain = new List<GameObject>();
 
@@ -28,8 +32,6 @@ public class TerrainGenerator : MonoBehaviour
     void Start()
     {
         terrain.Add(startingPlatform);
-        flatPlatformSpawner.addObjectToSpawner(startingPlatform);
-        attachToSpawner(startingPlatform, flatPlatformSpawner);
     }
 
     // Update is called once per frame

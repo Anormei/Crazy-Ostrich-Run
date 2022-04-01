@@ -379,6 +379,19 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5503438706588928612, guid: 4acd04f7155fc2f438937d2b01e0205a, type: 3}
   m_PrefabInstance: {fileID: 2099113010}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &479776232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 479776231}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a8d6da17a6bb4a41beaecef07118ec0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawner: {fileID: 376568334}
 --- !u!1 &508473509
 GameObject:
   m_ObjectHideFlags: 0
@@ -723,8 +736,6 @@ MonoBehaviour:
   game: {fileID: 1573034574}
   emptySpaceSpawner: {fileID: 923382779}
   startingPlatform: {fileID: 479776231}
-  flatPlatformSpawner: {fileID: 376568334}
-  endPlatformSpawner: {fileID: 0}
   minEmptySpace: 5
   maxEmptySpace: 20
 --- !u!1 &761955595
@@ -805,7 +816,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1834850030, guid: fafe8dfc85138ca4db69848e1f1cba21, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 862400236244607465, guid: fafe8dfc85138ca4db69848e1f1cba21, type: 3}
       propertyPath: m_LocalPosition.x
@@ -851,13 +862,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5235492793904636219, guid: fafe8dfc85138ca4db69848e1f1cba21, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: a00fd6c56d5490a4684692739cae1480, type: 2}
+    - target: {fileID: 5235492793904636219, guid: fafe8dfc85138ca4db69848e1f1cba21, type: 3}
+      propertyPath: m_Mass
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5718503372468775603, guid: fafe8dfc85138ca4db69848e1f1cba21, type: 3}
       propertyPath: game
       value: 
       objectReference: {fileID: 1573034574}
     - target: {fileID: 5718503372468775603, guid: fafe8dfc85138ca4db69848e1f1cba21, type: 3}
       propertyPath: slideEndLag
-      value: 0.8
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5718503372468775603, guid: fafe8dfc85138ca4db69848e1f1cba21, type: 3}
+      propertyPath: slideForce
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5718503372468775603, guid: fafe8dfc85138ca4db69848e1f1cba21, type: 3}
+      propertyPath: slideTime
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6012748179186818550, guid: fafe8dfc85138ca4db69848e1f1cba21, type: 3}
       propertyPath: m_Name
@@ -1489,8 +1516,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fc5d3a81bc99244fb0e0c1fec509dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1916771713}
-  centralizerRegenSpeed: 2
 --- !u!4 &1573034575
 Transform:
   m_ObjectHideFlags: 0
@@ -1553,9 +1578,9 @@ MonoBehaviour:
   terrainGenerator: {fileID: 744069560}
   maxObstacles: 5
   minGenerationTime: 0
-  maxGenerationTime: 5
-  edgeMargin: 0
-  obstacleMargin: 0
+  maxGenerationTime: 1
+  edgeMargin: 5
+  obstacleMargin: 5
   spawners:
   - {fileID: 1412484206}
   - {fileID: 1445817812}
@@ -1640,11 +1665,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1886261388}
   m_CullTransparentMesh: 0
---- !u!1 &1916771713 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6012748179186818550, guid: fafe8dfc85138ca4db69848e1f1cba21, type: 3}
-  m_PrefabInstance: {fileID: 803523533}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2099113010
 PrefabInstance:
   m_ObjectHideFlags: 0

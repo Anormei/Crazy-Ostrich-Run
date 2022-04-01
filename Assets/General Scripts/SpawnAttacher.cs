@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SpawnAttacher : MonoBehaviour
 {
-
+    [SerializeField]
     private Spawner spawner;
 
     public Spawner Spawner
