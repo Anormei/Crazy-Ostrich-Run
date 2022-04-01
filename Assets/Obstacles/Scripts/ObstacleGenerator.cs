@@ -153,25 +153,43 @@ public class ObstacleGenerator : MonoBehaviour
     {
         float furthest = getFurthestPoint();
 
-        return bounds(platformToPlace).rightBound() - furthest;
+        // get rightbound - edgemargin
+        return bounds(platformToPlace).rightBound() - edgeMargin - furthest;
     }
 
     private float getFurthestPoint()
     {
-        float posX = game.World.xMax;
-        float platformLeftBound = bounds(platformToPlace).leftBound();
 
-        posX = platformLeftBound > posX ? platformLeftBound : posX;
+        float worldRightX = game.World.xMax;
+        float platformLeftBound = getPlatformToPlaceLeftBound();
+        float obstacleRightBound = getFurthestObstacleX();
 
-        if (obstacles.Count > 0)
+        float posX = platformLeftBound > worldRightX ? platformLeftBound  : worldRightX;
+        posX = posX > obstacleRightBound ? posX : obstacleRightBound;
+
+        if(Mathf.Approximately(posX, worldRightX))
         {
-            GameObject obstacle = getFurthestObstacle();
-            float obstacleRightBound = bounds(obstacle).rightBound();
-
-            posX = obstacleRightBound > posX ? obstacleRightBound : posX;
+            float distanceToWorldRightX = worldRightX - Mathf.Max(platformLeftBound, obstacleRightBound);
+            posX += getRemainderMargin(distanceToWorldRightX, whichMargin(platformLeftBound, obstacleRightBound));
         }
 
         return posX;
+    }
+
+    private float getRemainderMargin(float distance, float margin)
+    {
+        float difference = margin - distance;
+        return difference > 0 ? difference : 0;
+    }
+
+    private float whichMargin(float platformLeftBound, float obstacleRightBound)
+    {
+        return platformLeftBound > obstacleRightBound ? edgeMargin : obstacleMargin;
+    }
+
+    private float getPlatformToPlaceLeftBound()
+    {
+        return bounds(platformToPlace).leftBound() + edgeMargin;
     }
 
     private GameObject getFurthestObstacle()
@@ -185,6 +203,18 @@ public class ObstacleGenerator : MonoBehaviour
         }
 
         return furthestObstacle;
+    }
+
+    private float getFurthestObstacleX()
+    {
+        if (obstacles.Count > 0)
+        {
+            GameObject obstacle = getFurthestObstacle();
+            float obstacleRightBound = bounds(obstacle).rightBound() + obstacleMargin;
+
+            return obstacleRightBound;
+        }
+        return float.MinValue;
     }
 
     private bool canFitOnPlatform(GameObject obj)
