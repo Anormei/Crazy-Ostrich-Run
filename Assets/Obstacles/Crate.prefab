@@ -14,9 +14,10 @@ GameObject:
   - component: {fileID: 5188975667730886653}
   - component: {fileID: -8895641095251856973}
   - component: {fileID: -4204813058473641511}
+  - component: {fileID: 7943910932828734058}
   m_Layer: 0
   m_Name: Crate
-  m_TagString: Obstacle
+  m_TagString: Crate
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -146,6 +147,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   game: {fileID: 0}
+  scrollerType: 0
 --- !u!114 &-4204813058473641511
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -158,3 +160,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12e1ce39e4573aa4a883c919c36cec1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7943910932828734058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 396316979484722586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fbb6b63296807347ae7b682135a0fac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitForce: 200
+  hitSpinForce: 30

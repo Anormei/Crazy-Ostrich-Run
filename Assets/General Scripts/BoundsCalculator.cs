@@ -39,7 +39,7 @@ public class BoundsCalculator : MonoBehaviour
         return pos.x - size.x / 2.0f;
     }
 
-    public float topBound()
+    public float bottomBound()
     {
         Vector3 pos = transform.localPosition;
         Vector3 size = bounds.size;
@@ -55,12 +55,12 @@ public class BoundsCalculator : MonoBehaviour
         return pos.x + size.x / 2.0f;
     }
 
-    public float bottomBound()
+    public float topBound()
     {
         Vector3 pos = transform.localPosition;
         Vector3 size = bounds.size;
 
-        return pos.x + size.y / 2.0f;
+        return pos.y + size.y / 2.0f;
     }
 
     public float width()

@@ -70,6 +70,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   game: {fileID: 0}
+  scrollerType: 1
 --- !u!114 &1132089605206838862
 MonoBehaviour:
   m_ObjectHideFlags: 0
