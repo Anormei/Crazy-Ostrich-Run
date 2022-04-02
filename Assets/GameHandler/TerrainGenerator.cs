@@ -28,10 +28,15 @@ public class TerrainGenerator : MonoBehaviour
 
     private List<GameObject> terrain = new List<GameObject>();
 
+    private float currentElevation;
+
+    private float terrainY;
+
     // Start is called before the first frame update
     void Start()
     {
         terrain.Add(startingPlatform);
+        terrainY = startingPlatform.transform.position.y + startingPlatform.GetComponent<BoundsCalculator>().halfHeight();
     }
 
     // Update is called once per frame
@@ -67,6 +72,7 @@ public class TerrainGenerator : MonoBehaviour
 
         if (rightEdgeOnScreen(land))
         {
+
             generateTerrain(land);
         }
     }
@@ -79,17 +85,23 @@ public class TerrainGenerator : MonoBehaviour
 
         if(spawner == emptySpaceSpawner)
         {
+            if (shouldChangeElevation())
+            {
+                Debug.Log("Elevation changing...");
+                currentElevation = generateNewElevation();
+            }
             offsetX = randOffset();
             spawner = spawner.GetComponent<NextPlatformHandler>().getNext();
         }
 
         terrain.Add(spawner.createObject((obj) =>
         {
-            obj.GetComponent<StaticScroller>().game = game;
+            obj.GetComponent<ObjectScroller>().game = game;
             obj.transform.parent = transform;
             obj.transform.gameObject.SetActive(true);
 
             positionAtEnd(obj, offsetX);
+
         }));
     }
 
@@ -99,9 +111,9 @@ public class TerrainGenerator : MonoBehaviour
         obj.GetComponent<SpawnAttacher>().Spawner = spawner;
     }
 
-    private Spawner getSpawner(GameObject obj)
+    private Spawner getNextSpawner(GameObject obj)
     {
-        return obj.GetComponent<SpawnAttacher>().Spawner;
+        return getNextPlatformHandler(obj).getNext();
     }
 
     private NextPlatformHandler getNextPlatformHandler(GameObject obj)
@@ -109,9 +121,9 @@ public class TerrainGenerator : MonoBehaviour
         return getSpawner(obj).GetComponent<NextPlatformHandler>();
     }
 
-    private Spawner getNextSpawner(GameObject obj)
+    private Spawner getSpawner(GameObject obj)
     {
-        return getNextPlatformHandler(obj).getNext();
+        return obj.GetComponent<SpawnAttacher>().Spawner;
     }
 
     private void positionAtEnd(GameObject obj, float offset)
@@ -120,7 +132,7 @@ public class TerrainGenerator : MonoBehaviour
         BoundsCalculator objBounds = obj.GetComponent<BoundsCalculator>();
         BoundsCalculator landBounds = land.GetComponent<BoundsCalculator>();
 
-        obj.transform.position = new Vector3(landBounds.rightBound() + objBounds.halfWidth() + offset, land.transform.position.y - (objBounds.halfHeight() - landBounds.halfHeight()), 0);
+        obj.transform.position = new Vector3(landBounds.rightBound() + objBounds.halfWidth() + offset, getElevation(obj), 0);
     }
 
     private bool rightEdgeOnScreen(GameObject obj)
@@ -145,8 +157,22 @@ public class TerrainGenerator : MonoBehaviour
         return obj.GetComponent<Rigidbody2D>() != null;
     }
 
-    private void matchElevation(GameObject obj, float offset)
+    private float generateNewElevation()
+    {
+        return Random.Range(minElevation, maxElevation);
+    }
+
+    private bool shouldChangeElevation()
     {
 
+        return Random.Range(0, changeElevationOddsOf) <= changeElevationOdds;
     }
+
+    private float getElevation(GameObject obj)
+    {
+        BoundsCalculator objBounds = obj.GetComponent<BoundsCalculator>();
+        return terrainY - objBounds.halfHeight() + currentElevation;
+    }
+
+
 }
