@@ -816,7 +816,7 @@ PrefabInstance:
       objectReference: {fileID: 1573034574}
     - target: {fileID: 1834850030, guid: fafe8dfc85138ca4db69848e1f1cba21, type: 3}
       propertyPath: regenCooldown
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1834850030, guid: fafe8dfc85138ca4db69848e1f1cba21, type: 3}
       propertyPath: m_Enabled
@@ -825,6 +825,14 @@ PrefabInstance:
     - target: {fileID: 1834850030, guid: fafe8dfc85138ca4db69848e1f1cba21, type: 3}
       propertyPath: regenSpeed
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1834850030, guid: fafe8dfc85138ca4db69848e1f1cba21, type: 3}
+      propertyPath: maxRegenSpeed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1834850030, guid: fafe8dfc85138ca4db69848e1f1cba21, type: 3}
+      propertyPath: regenGainPerSecond
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 862400236244607465, guid: fafe8dfc85138ca4db69848e1f1cba21, type: 3}
       propertyPath: m_LocalPosition.x

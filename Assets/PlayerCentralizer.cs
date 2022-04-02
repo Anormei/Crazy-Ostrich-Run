@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class PlayerCentralizer : MonoBehaviour
 {
-
     [SerializeField]
-    private float regenSpeed;
+    private float regenGainPerSecond;
+    [SerializeField]
+    private float maxRegenSpeed;
     [SerializeField]
     private float regenCooldown;
     [SerializeField]
@@ -16,6 +17,7 @@ public class PlayerCentralizer : MonoBehaviour
     [SerializeField]
     private Slide slideAction;
 
+    private float regen = 0;
     private float currentCooldown = 0;
 
     // Start is called before the first frame update
@@ -35,22 +37,30 @@ public class PlayerCentralizer : MonoBehaviour
 
         if (positionedLessThanCenter() && running() && !inCooldown())
         {
-
+            regenerate();
             Vector3 playerVelocity = rigidBody.velocity;
             //rb.AddForce(new Vector3(centralizerRegenSpeed, 0, 0));
-            rigidBody.velocity = new Vector3(regenSpeed, rigidBody.velocity.y, 0);
+            rigidBody.velocity = new Vector3(regen, rigidBody.velocity.y, 0);
         }
         else if(!inCooldown() || !running())
         {
-            currentCooldown = regenCooldown;
+            activateCooldown();
         }
 
         currentCooldown -= Time.deltaTime;
     }
 
-    public void forceCoolDown()
+    public void activateCooldown()
     {
         currentCooldown = regenCooldown;
+        regen = 0;
+    }
+
+    private void regenerate()
+    {
+        regen += regenGainPerSecond * Time.deltaTime;
+        if (regen > maxRegenSpeed)
+            regen = maxRegenSpeed;
     }
 
     private bool positionedLessThanCenter()

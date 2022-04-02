@@ -30,7 +30,7 @@ public class PlayerCrateInteraction : MonoBehaviour
     {
         if (collision.collider.tag == "Crate")
         {
-            playerCentralizer.forceCoolDown();
+            playerCentralizer.activateCooldown();
             rb.AddForce(new Vector3(-crashForce, 0, 0));
         }
     }
