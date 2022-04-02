@@ -30,17 +30,17 @@ public class PlayerCentralizer : MonoBehaviour
         
     }
 
-    private void FixedUpdate()
+    void FixedUpdate()
     {
 
-        if (positionedCenter() && running() && !inCooldown())
+        if (positionedLessThanCenter() && running() && !inCooldown())
         {
 
             Vector3 playerVelocity = rigidBody.velocity;
             //rb.AddForce(new Vector3(centralizerRegenSpeed, 0, 0));
             rigidBody.velocity = new Vector3(regenSpeed, rigidBody.velocity.y, 0);
         }
-        else if(!inCooldown())
+        else if(!inCooldown() || !running())
         {
             currentCooldown = regenCooldown;
         }
@@ -48,7 +48,12 @@ public class PlayerCentralizer : MonoBehaviour
         currentCooldown -= Time.deltaTime;
     }
 
-    private bool positionedCenter()
+    public void forceCoolDown()
+    {
+        currentCooldown = regenCooldown;
+    }
+
+    private bool positionedLessThanCenter()
     {
 
         Vector3 playerPos = rigidBody.position;

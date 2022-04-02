@@ -59,18 +59,18 @@
     <Compile Include="Assets\General Scripts\SpawnAttacher.cs" />
     <Compile Include="Assets\Character\Controls\FastFall.cs" />
     <Compile Include="Assets\Platforms\Scripts\ObstacleBlocker.cs" />
-    <Compile Include="Assets\GameHandler\StaticScroller.cs" />
     <Compile Include="Assets\Character\Controls\PlayerAction.cs" />
     <Compile Include="Assets\UnityEditor\GameObjectCustomMenu.cs" />
     <Compile Include="Assets\Platforms\Scripts\PlatformOdds.cs" />
     <Compile Include="Assets\Utilities\PoolFactory.cs" />
     <Compile Include="Assets\Utilities\ExtensionMethods.cs" />
+    <Compile Include="Assets\PlayerCentralizer.cs" />
     <Compile Include="Assets\General Scripts\Spawner.cs" />
     <Compile Include="Assets\GameHandler\GameStart.cs" />
     <Compile Include="Assets\GameHandler\GameHandler.cs" />
     <Compile Include="Assets\Character\Controls\Jump.cs" />
     <Compile Include="Assets\General Scripts\BoundsCalculator.cs" />
-    <Compile Include="Assets\GameHandler\KinematicScroller.cs" />
+    <Compile Include="Assets\GameHandler\ObjectScroller.cs" />
     <Compile Include="Assets\Obstacles\Scripts\ObstacleGenerator.cs" />
     <Compile Include="Assets\GameHandler\TerrainGenerator.cs" />
     <Compile Include="Assets\Platforms\Scripts\NextPlatformHandlerEditor.cs" />
@@ -78,7 +78,8 @@
     <Compile Include="Assets\General Scripts\ModelBounds.cs" />
     <Compile Include="Assets\EmptyProperties.cs" />
     <Compile Include="Assets\Platforms\Scripts\NextPlatformHandler.cs" />
-    <Compile Include="Assets\PlayerCentralizer.cs" />
+    <Compile Include="Assets\CratePlayerInteraction.cs" />
+    <Compile Include="Assets\PlayerCrateInteraction.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
