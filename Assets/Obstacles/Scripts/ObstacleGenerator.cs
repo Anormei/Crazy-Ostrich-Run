@@ -19,7 +19,10 @@ public class ObstacleGenerator : MonoBehaviour
     [SerializeField]
     private float obstacleMargin;
     [SerializeField]
+    private Spawner crateObstacleSpawner;
+    [SerializeField]
     private Spawner[] spawners;
+
 
     private float generationTime;
 
@@ -41,39 +44,26 @@ public class ObstacleGenerator : MonoBehaviour
         handleActiveObstacles();
         generationTime -= Time.deltaTime;
         platformToPlace = terrainGenerator.getFrontEnd();
-        /*if (platformToPlace != terrainGenerator.getFrontEnd())
-        {
-
-            minOffset = 0;
-            maxOffset = platformToPlace.width();
-        }*/
 
         if(generationTime <= 0 && !reachedObstacleLimit())
         {
-            GameObject obstacle = generateObstacle();
-            ObstacleBlocker obstacleBlocker = platformToPlace
-                .GetComponent<SpawnAttacher>().Spawner
-                .GetComponent<ObstacleBlocker>();
+            Spawner spawner = getRandomSpawner();
 
-            if (obstacleBlocker != null && obstacleBlocker.isIllegal(obstacle))
+            if (spawner == crateObstacleSpawner)
             {
-                obstacle.GetComponent<SpawnAttacher>().delete();
-                obstacles.Remove(obstacle);
-                Debug.Log("Obstacle is illegal, removing...");
+
             }
-            else
-            {
-                attachToPlatform(obstacle);
-            }
+            GameObject obstacle = generateObstacle(spawner);
+            addObstacle(obstacle);
+
             generateNewTime();
             
         }
 
     }
 
-    public GameObject generateObstacle()
+    public GameObject generateObstacle(Spawner spawner)
     {
-        Spawner spawner = spawners[Random.Range(0, spawners.Length)];
         GameObject obstacle = spawner.createObject((obj) =>
         {
             obj.GetComponent<ObjectScroller>().game = game;
@@ -83,6 +73,29 @@ public class ObstacleGenerator : MonoBehaviour
 
         obstacles.Add(obstacle);
         return obstacle;
+    }
+
+    private Spawner getRandomSpawner()
+    {
+        return spawners[Random.Range(0, spawners.Length)];
+    }
+
+    private void addObstacle(GameObject obstacle)
+    {
+        ObstacleBlocker obstacleBlocker = platformToPlace
+        .GetComponent<SpawnAttacher>().Spawner
+        .GetComponent<ObstacleBlocker>();
+
+        if (obstacleBlocker != null && obstacleBlocker.isIllegal(obstacle))
+        {
+            obstacle.GetComponent<SpawnAttacher>().delete();
+            obstacles.Remove(obstacle);
+            Debug.Log("Obstacle is illegal, removing...");
+        }
+        else
+        {
+            attachToPlatform(obstacle);
+        }
     }
 
     private bool reachedObstacleLimit()
