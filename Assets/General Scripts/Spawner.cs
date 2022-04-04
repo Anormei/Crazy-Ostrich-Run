@@ -9,8 +9,8 @@ public class Spawner : MonoBehaviour
     public GameObject objectToSpawn;
     public int maxPoolSize;
 
-    private PoolFactory<GameObject> poolFactory;
-    private List<GameObject> objects = new List<GameObject>();
+    protected PoolFactory<GameObject> poolFactory;
+    protected List<GameObject> objects = new List<GameObject>();
 
 
     void Awake()

@@ -21,6 +21,8 @@ public class ObstacleGenerator : MonoBehaviour
     [SerializeField]
     private Spawner crateObstacleSpawner;
     [SerializeField]
+    private float multiCrateMargin;
+    [SerializeField]
     private Spawner[] spawners;
 
 
@@ -49,10 +51,6 @@ public class ObstacleGenerator : MonoBehaviour
         {
             Spawner spawner = getRandomSpawner();
 
-            if (spawner == crateObstacleSpawner)
-            {
-
-            }
             GameObject obstacle = generateObstacle(spawner);
             addObstacle(obstacle);
 
@@ -144,13 +142,13 @@ public class ObstacleGenerator : MonoBehaviour
         
         if(posX > game.World.x)
         {
-            posX += applyOffset(obj);
+            posX += generateOffset(obj);
         }
 
         return posX + bounds(obj).halfWidth();
     }
 
-    private float applyOffset(GameObject obj)
+    private float generateOffset(GameObject obj)
     {
         return Random.Range(0, getAvailableSpace() - bounds(obj).width());
     }
