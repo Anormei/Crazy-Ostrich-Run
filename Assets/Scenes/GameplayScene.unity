@@ -1218,8 +1218,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawners:
-  - {fileID: 1445817812}
-  - {fileID: 1412484206}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!50 &1366527181 stripped
 Rigidbody2D:
   m_CorrespondingSourceObject: {fileID: 5235492793904636219, guid: fafe8dfc85138ca4db69848e1f1cba21, type: 3}
@@ -1301,6 +1301,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1412484207}
   - component: {fileID: 1412484206}
+  - component: {fileID: 1412484208}
   m_Layer: 0
   m_Name: CrateObstacleSpawner
   m_TagString: Untagged
@@ -1317,11 +1318,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1412484205}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bcf42cc7e7b51154c946499b78073761, type: 3}
+  m_Script: {fileID: 11500000, guid: bf2bf9dc422d1234ba02646922ee1dc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   objectToSpawn: {fileID: 396316979484722586, guid: a5ce7e0cb5fcff34495e33cb3c963aca, type: 3}
   maxPoolSize: 10
+  game: {fileID: 1573034574}
+  spawner: {fileID: 1412484208}
+  cost: 20
 --- !u!4 &1412484207
 Transform:
   m_ObjectHideFlags: 0
@@ -1336,6 +1340,20 @@ Transform:
   m_Father: {fileID: 624793764}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1412484208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1412484205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcf42cc7e7b51154c946499b78073761, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectToSpawn: {fileID: 396316979484722586, guid: a5ce7e0cb5fcff34495e33cb3c963aca, type: 3}
+  maxPoolSize: 10
 --- !u!1 &1445817810
 GameObject:
   m_ObjectHideFlags: 0
@@ -1346,6 +1364,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1445817811}
   - component: {fileID: 1445817812}
+  - component: {fileID: 1445817813}
   m_Layer: 0
   m_Name: SignObstacleSpawner
   m_TagString: Untagged
@@ -1368,6 +1387,23 @@ Transform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1445817812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1445817810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf2bf9dc422d1234ba02646922ee1dc8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectToSpawn: {fileID: 396316979484722586, guid: 17efb24e49ad07d43aeb34e2be8219d0, type: 3}
+  maxPoolSize: 10
+  game: {fileID: 1573034574}
+  spawner: {fileID: 1445817813}
+  cost: 100
+--- !u!114 &1445817813
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1638,10 +1674,12 @@ MonoBehaviour:
   terrainGenerator: {fileID: 744069560}
   maxObstacles: 5
   minGenerationTime: 0
-  maxGenerationTime: 1
+  maxGenerationTime: 5
   edgeMargin: 5
   obstacleMargin: 5
-  spawners:
+  crateObstacleSpawner: {fileID: 0}
+  multiCrateMargin: 0
+  obstacleSpawners:
   - {fileID: 1412484206}
   - {fileID: 1445817812}
 --- !u!1 &1886261388

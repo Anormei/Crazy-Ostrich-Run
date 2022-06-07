@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: -8895641095251856973}
   - component: {fileID: -4204813058473641511}
   - component: {fileID: 7943910932828734058}
+  - component: {fileID: 7488983947933565430}
   m_Layer: 0
   m_Name: Crate
   m_TagString: Crate
@@ -174,3 +175,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitForce: 200
   hitSpinForce: 30
+--- !u!114 &7488983947933565430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 396316979484722586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 608eeabb5e295ff448174de2df105e2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftMargin: 1
+  rightMargin: 1

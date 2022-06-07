@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ObstacleGenerator : MonoBehaviour
 {
+    public static int MAX_POINTS = 100;
+
     [SerializeField]
     private GameHandler game;
     [SerializeField]
@@ -23,8 +25,9 @@ public class ObstacleGenerator : MonoBehaviour
     [SerializeField]
     private float multiCrateMargin;
     [SerializeField]
-    private Spawner[] spawners;
+    private ObstacleSpawner[] obstacleSpawners;
 
+    private float spawnPointX;
 
     private float generationTime;
 
@@ -33,6 +36,12 @@ public class ObstacleGenerator : MonoBehaviour
     private float maxOffset;
 
     private List<GameObject> obstacles = new List<GameObject>();
+    private Queue<GameObject> obstacleQueue = new Queue<GameObject>();
+
+    void Awake()
+    {
+        spawnPointX = game.World.xMax;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -47,53 +56,94 @@ public class ObstacleGenerator : MonoBehaviour
         generationTime -= Time.deltaTime;
         platformToPlace = terrainGenerator.getFrontEnd();
 
-        if(generationTime <= 0 && !reachedObstacleLimit())
+        if(generationTime <= 0 && !reachedObstacleLimit() && obstacleQueue.Count == 0 && getFurthestPoint() > spawnPointX)
         {
-            Spawner spawner = getRandomSpawner();
+            // replace: queue a bunch of objects
+            ObstacleSpawner spawner = getRandomObstacleSpawner();
 
-            GameObject obstacle = generateObstacle(spawner);
-            addObstacle(obstacle);
+            /*
+             * 1. Spawn initial obstacle (if valid)
+             * if valid:
+             *      2. Generate random points
+             *      3. Spawn more obstacles from random points and random spawners ? or odds-based generation?
+             * if invalid:
+             *      skip
+             */
 
-            generateNewTime();
-            
+            GameObject obstacle = spawner.generateObstacle();
+            obstacle.SetActive(false);
+            obstacleQueue.Enqueue(obstacle);
+
+            int points = generateRandomPoints();
+            bool canAfford = true;
+
+            do{
+                ObstacleGenerationFeedback feedback = spawner.buyObstacle(points);
+                points = feedback.remainingPoints;
+
+                if(feedback.obstacleGenerated != null)
+                {
+                    feedback.obstacleGenerated.SetActive(false);
+                    obstacleQueue.Enqueue(feedback.obstacleGenerated);
+                }
+
+                canAfford = points > 0;
+            } while (canAfford);
+
+                generateNewTime();
+            Debug.Log("obstacles in queue = " + obstacleQueue.Count);
+        } // else still generate new time?
+
+        if (spawnPointIsFree())
+        {
+            GameObject obstacle = obstacleQueue.Dequeue();
+            if (!isObstacleIllegal(obstacle))
+            {
+                attachToPlatform(obstacle);
+                obstacle.SetActive(true);
+            }
         }
 
     }
 
-    public GameObject generateObstacle(Spawner spawner)
+    public int generateRandomPoints()
     {
-        GameObject obstacle = spawner.createObject((obj) =>
+        return Random.Range(0, MAX_POINTS);
+    }
+
+    private bool spawnPointIsFree()
+    {
+        GameObject furthestObstacle = getFurthestObstacle();
+        if (furthestObstacle == null)
         {
-            obj.GetComponent<ObjectScroller>().game = game;
-            obj.transform.parent = transform;
-            obj.transform.gameObject.SetActive(true);
-        });
 
-        obstacles.Add(obstacle);
-        return obstacle;
+            return obstacleQueue.Count > 0;
+        }
+
+        float obstacleRightMost = furthestObstacle.GetComponent<ObstacleMargin>().rightMarginX();
+        return obstacleRightMost < spawnPointX && obstacleQueue.Count > 0;
     }
 
-    private Spawner getRandomSpawner()
+    private ObstacleSpawner getRandomObstacleSpawner()
     {
-        return spawners[Random.Range(0, spawners.Length)];
+        return obstacleSpawners[Random.Range(0, obstacleSpawners.Length)];
     }
 
-    private void addObstacle(GameObject obstacle)
+    public bool isObstacleIllegal(GameObject obstacle)
     {
         ObstacleBlocker obstacleBlocker = platformToPlace
-        .GetComponent<SpawnAttacher>().Spawner
-        .GetComponent<ObstacleBlocker>();
+            .GetComponent<SpawnAttacher>().Spawner
+            .GetComponent<ObstacleBlocker>();
 
-        if (obstacleBlocker != null && obstacleBlocker.isIllegal(obstacle))
+        bool isIllegal = obstacleBlocker != null && obstacleBlocker.isIllegal(obstacle) && canFitOnPlatform(obstacle);
+
+        if (isIllegal)
         {
             obstacle.GetComponent<SpawnAttacher>().delete();
             obstacles.Remove(obstacle);
-            Debug.Log("Obstacle is illegal, removing...");
         }
-        else
-        {
-            attachToPlatform(obstacle);
-        }
+
+        return isIllegal;
     }
 
     private bool reachedObstacleLimit()
@@ -110,25 +160,22 @@ public class ObstacleGenerator : MonoBehaviour
 
         if (leftScreen(obstacle))
         {
-            obstacle.GetComponent<SpawnAttacher>().delete();
-            obstacles.RemoveAt(0);
+            removeObstacle(obstacle);
         }
 
     }
 
-    private void attachToPlatform(GameObject obj)
+    public void removeObstacle(GameObject obstacle)
     {
-        if (!canFitOnPlatform(obj))
-        {
-            Debug.Log("Cannot generate obstacle... awaiting...");
-            obj.GetComponent<SpawnAttacher>().delete();
-            obstacles.Remove(obj);
-            return;
-        }
+        obstacle.GetComponent<SpawnAttacher>().delete();
+        obstacles.Remove(obstacle);
+    }
 
-        Debug.Log("Generating new obstacle...");
+    private void attachToPlatform(GameObject obstacle)
+    {
 
-        obj.transform.position = new Vector3(placeUnseen(obj), placeOnTopOfPlatform(obj), 0);
+        obstacles.Add(obstacle);
+        obstacle.transform.position = new Vector3(placeAtSpawnPointX(obstacle), placeOnTopOfPlatform(obstacle), 0);
     }
 
     private void generateNewTime()
@@ -136,16 +183,9 @@ public class ObstacleGenerator : MonoBehaviour
         generationTime = Random.Range(minGenerationTime, maxGenerationTime);
     }
 
-    private float placeUnseen(GameObject obj)
+    private float placeAtSpawnPointX(GameObject obj)
     {
-        float posX = getFurthestPoint();
-        
-        if(posX > game.World.x)
-        {
-            posX += generateOffset(obj);
-        }
-
-        return posX + bounds(obj).halfWidth();
+        return spawnPointX + bounds(obj).halfWidth();
     }
 
     private float generateOffset(GameObject obj)
@@ -205,6 +245,9 @@ public class ObstacleGenerator : MonoBehaviour
 
     private GameObject getFurthestObstacle()
     {
+        if (obstacles.Count == 0)
+            return null;
+
         GameObject furthestObstacle = obstacles[0];
         foreach(GameObject obstacle in obstacles)
         {
@@ -218,14 +261,15 @@ public class ObstacleGenerator : MonoBehaviour
 
     private float getFurthestObstacleX()
     {
-        if (obstacles.Count > 0)
-        {
+        if (obstacles.Count == 0)
+            return float.MinValue;
+
             GameObject obstacle = getFurthestObstacle();
             float obstacleRightBound = bounds(obstacle).rightBound() + obstacleMargin;
 
             return obstacleRightBound;
-        }
-        return float.MinValue;
+        
+
     }
 
     private bool canFitOnPlatform(GameObject obj)
