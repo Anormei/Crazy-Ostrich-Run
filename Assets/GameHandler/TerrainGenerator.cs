@@ -54,6 +54,31 @@ public class TerrainGenerator : MonoBehaviour
         return terrain[terrain.Count - 1];
     }
 
+    public void findIntersectingEdges(float left, float right, List<GameObject> buffer)
+    {
+        foreach(GameObject platform in terrain)
+        {
+            BoundsCalculator bounds = platform.GetComponent<BoundsCalculator>();
+
+            float leftBound = bounds.leftBound();
+            float rightBound = bounds.rightBound();
+
+            if((left > leftBound && left < rightBound) || (right > leftBound && right < rightBound))
+            {
+                buffer.Add(platform);
+            }
+
+        }
+    }
+
+    private bool rightEdgeEqualsLeftEdge(GameObject obj1, GameObject obj2)
+    {
+        float rightEdge = obj1.GetComponent<BoundsCalculator>().rightBound();
+        float leftEdge = obj2.GetComponent<BoundsCalculator>().rightBound();
+
+        return Mathf.Approximately(rightEdge, leftEdge);
+    }
+
     private void handleEndTerrain()
     {
         GameObject land = terrain[0];
