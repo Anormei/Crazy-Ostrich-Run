@@ -23,7 +23,7 @@ public class ObstacleSpawner : MonoBehaviour
 
     }
 
-        public ObstacleGenerationFeedback buyObstacle(int pointsLeft)
+    public ObstacleGenerationFeedback buyObstacle(int pointsLeft)
     {
 
         int pointsRemaining = pointsLeft - cost;
