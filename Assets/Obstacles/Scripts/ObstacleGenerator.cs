@@ -96,6 +96,8 @@ public class ObstacleGenerator : MonoBehaviour
                 generateNewTime();
             
         } // else still generate new time?
+/*
+        Debug.Log("Obstacles in list = " + obstacles.Count + ", obstacles in queue = " + obstacleQueue.Count);*/
 
         if (spawnPointIsFree())
         {
@@ -104,7 +106,7 @@ public class ObstacleGenerator : MonoBehaviour
             platformsToPlace.Clear();
             terrainGenerator.findIntersectingEdges(spawnPointX, spawnPointX + bounds(obstacle).width(), platformsToPlace);
 
-            if (!isObstacleIllegal(obstacle) && spawnIsInBound())
+            if (!isObstacleIllegal(obstacle) && spawnIsInBound() && hasLeftMarginSpace(obstacle))
             {
                 attachToPlatform(obstacle);
                 obstacle.SetActive(true);
@@ -194,7 +196,9 @@ public class ObstacleGenerator : MonoBehaviour
         }
 
         float obstacleRightMost = furthestObstacle.GetComponent<ObstacleMargin>().rightMarginX();
-        float nextObstacleLeftMost = obstacle.GetComponent<ObstacleMargin>().leftMarginX();
+        float nextObstacleLeftMost = spawnPointX - obstacle.GetComponent<ObstacleMargin>().leftMargin;
+
+/*        Debug.Log("obstacle right = " + obstacleRightMost + ", obstacle left = " + nextObstacleLeftMost);*/
 
         return nextObstacleLeftMost > obstacleRightMost;
 
@@ -257,7 +261,6 @@ public class ObstacleGenerator : MonoBehaviour
     private float getAvailableSpace()
     {
 
-        Debug.Log("platformsToPlacer = " + platformsToPlace.Count);
         if (platformsToPlace.Count == 0)
             return 0;
 

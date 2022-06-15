@@ -27,6 +27,6 @@ public class ObstacleMargin : MonoBehaviour
 
     public float leftMarginX()
     {
-        return GetComponent<BoundsCalculator>().leftBound() + leftMargin;
+        return GetComponent<BoundsCalculator>().leftBound() - leftMargin;
     }
 }

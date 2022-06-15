@@ -84,6 +84,7 @@
     <Compile Include="Assets\EmptyProperties.cs" />
     <Compile Include="Assets\PlayerCrateInteraction.cs" />
     <Compile Include="Assets\Platforms\Scripts\NextPlatformHandler.cs" />
+    <Compile Include="Assets\KeyboardControls.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
